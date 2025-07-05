@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,9 @@
       height: 100vh;
       overflow: hidden;
       transition: background 2s ease, color 2s ease;
+    }
+    audio {
+      display: none;
     }
     .content-container {
       display: flex;
@@ -113,6 +115,7 @@
       font-family: 'Indie Flower', cursive;
       animation: pulse 2s infinite;
       font-size: 0.8em;
+      margin-top: 20px;
     }
     .calendar .month {
       grid-column: span 7;
@@ -156,24 +159,69 @@
       background-color: #ff1493;
       transform: scale(1.05);
     }
+    .mute-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4;
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: pulse 2s infinite;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
+  <audio id="bg-music" loop>
+    <source src="LoveStory.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="content-container">
     <h1 id="main-title">A Very Happy Anniversary! ❤️</h1>
     <p id="main-message">To my most beautiful wife,<br>
-    who have given my life a meaning.✨<br>
+    who has given my life a meaning. ✨<br>
     I love you more than words can say.</p>
     <button class="button" id="surpriseBtn" onclick="launchSurprise()">Click for a surprise</button>
   </div>
+
+  <div class="mute-button" id="muteBtn" style="display:none;" onclick="toggleMute()">❤️</div>
+
   <script>
     let triggered = false;
+    let isMuted = false;
+    const music = document.getElementById('bg-music');
+
     function launchSurprise() {
       if (triggered) return;
       triggered = true;
       document.getElementById('surpriseBtn').remove();
       document.body.style.background = 'radial-gradient(circle at center, #ffe1f2, #ff99cc, #ff66b2)';
       document.body.style.color = '#fff5f8';
+      document.getElementById('muteBtn').style.display = 'block';
+
+      // Start playing background music with fade-in
+      music.volume = 0;
+      music.play().then(() => {
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          if (vol < 1) {
+            vol += 0.02;
+            music.volume = Math.min(vol, 1);
+          } else {
+            clearInterval(fadeIn);
+          }
+        }, 100);
+      }).catch(err => {
+        console.log('Autoplay blocked:', err);
+      });
 
       const contentContainer = document.querySelector('.content-container');
       contentContainer.innerHTML = `
@@ -201,6 +249,12 @@
         document.body.appendChild(star);
         setTimeout(() => star.remove(), 2000);
       }, 1000);
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      music.muted = isMuted;
+      document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '❤️';
     }
   </script>
 </body>
