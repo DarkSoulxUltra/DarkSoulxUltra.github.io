@@ -1,234 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anniversary Surprise ❤️</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Sacramento&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    overflow: hidden;
-    background: #000;
-    color: #0f0;
-    font-family: 'Orbitron', sans-serif;
-  }
-  #terminal {
-    position: absolute;
-    inset: 0;
-    padding: 20px;
-    white-space: pre-wrap;
-    font-size: 18px;
-    line-height: 1.5;
-    background: #000;
-    opacity: 1;
-    z-index: 5;
-  }
-  #start-btn {
-    visibility: hidden;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 14px 28px;
-    background: #39ff14;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.3em;
-    font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    z-index: 999;
-  }
-  #start-btn.show {
-    visibility: visible;
-  }
-  #scene {
-    display: none;
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #1a000d, #0d001a);
-    overflow: hidden;
-  }
-  #heart-svg {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70vw;
-    max-width: 400px;
-    height: auto;
-    z-index: 2;
-  }
-  .heart-path {
-    stroke: #39ff14;
-    stroke-width: 5;
-    fill: none;
-    stroke-dasharray: 4000;
-    stroke-dashoffset: 4000;
-    animation: drawPulse 4s forwards;
-  }
-  @keyframes drawPulse {
-    to { stroke-dashoffset: 0; }
-    50% { filter: drop-shadow(0 0 20px #39ff14); }
-  }
-  #heart-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    text-align: center;
-    font-size: 1.3em;
-    line-height: 1.5;
-    color: #fff;
-    font-family: 'Sacramento', cursive;
-    z-index: 3;
-  }
-  #calendar {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    width: 220px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border: 2px solid #39ff14;
-    border-radius: 10px;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    z-index: 2;
-  }
-  #calendar .month {
-    grid-column: 1 / 8;
-    font-size: 1.2em;
-    text-align: center;
-  }
-  #calendar div {
-    padding: 6px;
-    text-align: center;
-    border-radius: 4px;
-  }
-  #calendar .highlight {
-    background: #39ff14;
-    color: #000;
-  }
-  #particles, #comets {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-  #muteBtn {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #39ff14;
-    color: #000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anniversary Surprise ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #0f0;
+      font-family: 'Orbitron', monospace;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #terminal {
+      font-size: 1.4em;
+      text-align: left;
+      white-space: pre-wrap;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+    }
+    #startBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 40px;
+      background: #00ff99;
+      color: black;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
+      transition: all 0.3s ease;
+    }
+    #startBtn:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 30px #00ffaa, 0 0 60px #00ffaa;
+    }
+    #surprise {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #1a0025, #000);
+      color: #fff;
+      font-family: 'Sacramento', cursive;
+      text-align: center;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      border: 3px solid #00ff99;
+      border-radius: 50% 50% 0 0;
+      animation: neonPulse 2s infinite alternate;
+      clip-path: path('M512 921C512 921 64 568 64 315C64 153 215 64 357 64C474 64 512 153 512 153C512 153 550 64 667 64C809 64 960 153 960 315C960 568 512 921 512 921Z');
+    }
+    @keyframes neonPulse {
+      from { box-shadow: 0 0 20px #00ff99; }
+      to { box-shadow: 0 0 40px #00ffaa, 0 0 80px #00ffaa; }
+    }
+    .message {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 1.8em;
+      max-width: 90%;
+    }
+    .calendar {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #00ff99;
+      border: 2px solid #00ff99;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #00ff99;
+      font-family: 'Orbitron', monospace;
+    }
+    .stars, .comets {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .star, .comet {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+    .star {
+      width: 2px;
+      height: 2px;
+      animation: twinkle 2s infinite alternate ease-in-out;
+    }
+    .comet {
+      width: 4px;
+      height: 20px;
+      background: linear-gradient(white, transparent);
+      animation: flyby 3s linear infinite;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+    @keyframes flyby {
+      from { transform: translateX(100vw) translateY(0); opacity: 1; }
+      to { transform: translateX(-100vw) translateY(100vh); opacity: 0; }
+    }
+    .mute-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #00ff99;
+      color: black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.4em;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ff99;
+    }
+  </style>
 </head>
 <body>
-
-<div id="terminal"></div>
-<button id="start-btn">💖 Tap for Surprise 💖</button>
-
-<div id="scene">
-  <svg id="heart-svg" viewBox="0 0 1024 1024">
-    <path class="heart-path" d="M512 920C512 920 100 540 100 300C100 175 215 80 357 80C480 80 512 175 512 175C512 175 544 80 667 80C809 80 924 175 924 300C924 540 512 920 512 920Z"/>
-  </svg>
-  <div id="heart-text">Every Love Story is special, unique<br>and beautiful. But ours is my Favourite 💓</div>
-  <canvas id="particles"></canvas>
-  <canvas id="comets"></canvas>
-  <div id="calendar">
-    <div class="month">July 2025</div>
-    <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-    ${[...Array(31).keys()].map(i=>`<div class="${i+1===9?'highlight':''}">${i+1}</div>`).join('')}
+  <div id="terminal"></div>
+  <button id="startBtn" onclick="startSurprise()">Launch Surprise 💖</button>
+  <div id="surprise">
+    <div class="stars"></div>
+    <div class="comets"></div>
+    <div class="heart"></div>
+    <div class="message">Every Love Story is special, unique and beautiful. But ours is my Favourite 💖</div>
+    <div class="calendar">July 2025<br>S M T W T F S<br>    1  2  3  4  5  6<br>7  8 <span style='color:#ff69b4;font-weight:bold;'>9</span> 10 11 12 13<br>14 15 16 17 18 19 20<br>21 22 23 24 25 26 27<br>28 29 30 31</div>
+    <div class="mute-btn" onclick="toggleMute()">🔊</div>
   </div>
-  <div id="muteBtn">🔊</div>
-  <audio id="bg-music" loop src="LoveStory.mp3"></audio>
-</div>
-
-<script>
-const terminal=document.getElementById('terminal');
-const btn=document.getElementById('start-btn');
-const lines=["Initializing anniversary protocol v1.0...","Connecting to ❤️...","Compiling love memories...","Success ✅"];
-let idx=0,char=0;
-function typeLine(){
-  if(idx<lines.length){
-    let span=document.createElement('div');
-    terminal.appendChild(span);
-    let line=lines[idx];
-    function typeChar(){
-      if(char<line.length){
-        span.innerHTML+=line[char];
-        char++;
-        setTimeout(typeChar,50);
-      }else{
-        idx++;char=0;setTimeout(typeLine,400);
+  <audio id="bg-music" loop>
+    <source src="LoveStory.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const terminalText = [
+      "Initializing anniversary protocol v1.0...",
+      "Connecting to ❤️...",
+      "Compiling love memories...",
+      "Success ✅"
+    ];
+    let i = 0;
+    function typeLine() {
+      if (i < terminalText.length) {
+        document.getElementById('terminal').innerHTML += terminalText[i] + '\n';
+        i++;
+        setTimeout(typeLine, 1200);
+      } else {
+        document.getElementById('startBtn').style.display = 'block';
       }
     }
-    typeChar();
-  }else{
-    btn.classList.add('show');
-  }
-}
-typeLine();
+    typeLine();
 
-btn.onclick=()=>{
-  btn.remove();
-  terminal.remove();
-  const scene=document.getElementById('scene');
-  scene.style.display='block';
-  const music=document.getElementById('bg-music');
-  music.play().catch(()=>{});
-  document.getElementById('muteBtn').style.display='flex';
-  document.getElementById('muteBtn').onclick=()=>{
-    music.muted=!music.muted;
-    document.getElementById('muteBtn').textContent=music.muted?'🔇':'🔊';
-  };
-  initParticles();
-  initComets();
-};
-
-function initParticles(){
-  const c=document.getElementById('particles');c.width=innerWidth;c.height=innerHeight;
-  const ctx=c.getContext('2d');
-  const stars=Array.from({length:100},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,a:Math.random()}));
-  function anim(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      ctx.globalAlpha=Math.abs(Math.sin(s.a));ctx.fillStyle='#fff';
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);ctx.fill();s.a+=0.02;
-    });requestAnimationFrame(anim);
-  }anim();
-}
-
-function initComets(){
-  const c=document.getElementById('comets');c.width=innerWidth;c.height=innerHeight;
-  const ctx=c.getContext('2d');const comets=[];
-  setInterval(()=>{comets.push({x:Math.random()*c.width,y:0,vx:(Math.random()-0.5)*4,vy:Math.random()*4+2,life:100})},800);
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    comets.forEach((m,i)=>{
-      ctx.strokeStyle='rgba(255,255,255,0.8)';ctx.lineWidth=2;
-      ctx.beginPath();ctx.moveTo(m.x,m.y);ctx.lineTo(m.x-m.vx*5,m.y-m.vy*5);ctx.stroke();
-      m.x+=m.vx;m.y+=m.vy;m.life--;
-      if(m.life<0||m.x<0||m.x>c.width||m.y>c.height)comets.splice(i,1);
-    });requestAnimationFrame(draw);
-  }draw();
-}
-</script>
+    function startSurprise() {
+      document.getElementById('terminal').style.display = 'none';
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('surprise').style.display = 'block';
+      playMusic();
+      createParticles();
+    }
+    const music = document.getElementById('bg-music');
+    function playMusic() {
+      music.play().catch(()=>console.log('Autoplay blocked'));
+    }
+    function toggleMute() {
+      music.muted = !music.muted;
+      document.querySelector('.mute-btn').textContent = music.muted ? '🔇' : '🔊';
+    }
+    function createParticles() {
+      const stars = document.querySelector('.stars');
+      const comets = document.querySelector('.comets');
+      for (let i=0;i<100;i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random()*100+'vw';
+        star.style.top = Math.random()*100+'vh';
+        stars.appendChild(star);
+      }
+      setInterval(()=>{
+        const comet = document.createElement('div');
+        comet.classList.add('comet');
+        comet.style.left = Math.random()*100+'vw';
+        comets.appendChild(comet);
+        setTimeout(()=>comet.remove(), 3000);
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
