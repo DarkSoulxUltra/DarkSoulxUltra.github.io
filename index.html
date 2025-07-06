@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anniversary Surprise ❤️</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Sacramento&display=swap');
-    *, *:before, *:after { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       overflow: hidden;
       background: #000;
@@ -26,19 +26,25 @@
     }
     #start-btn {
       opacity: 0;
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: 2px solid #0f0;
+      pointer-events: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 14px 28px;
+      background: #39ff14;
       color: #000;
-      background: #0f0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.3em;
+      font-family: 'Orbitron', sans-serif;
       cursor: pointer;
-      font-size: 20px;
-      font-weight: bold;
-      animation: glowBtn 1.5s infinite alternate;
-      transition: opacity 1s ease;
+      z-index: 999;
+      transition: opacity 1s ease, transform 0.3s ease;
     }
-    @keyframes glowBtn {
-      to { box-shadow: 0 0 20px #0f0; }
+    #start-btn:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 20px #39ff14;
     }
     #scene {
       display: none;
@@ -154,7 +160,7 @@
 <body>
 
 <div id="terminal"></div>
-<button id="start-btn">Click for Surprise ➥</button>
+<button id="start-btn">💖 Tap for Surprise 💖</button>
 
 <div id="scene">
   <svg id="heart-svg" viewBox="0 0 1024 1024">
@@ -197,12 +203,16 @@ function typeLine(){
     }
     typeChar();
   }else{
-    const btn=document.getElementById('start-btn');
-    btn.style.display='block';
-    requestAnimationFrame(()=>btn.style.opacity=1);
+    revealButton();
   }
 }
 typeLine();
+
+function revealButton(){
+  const btn=document.getElementById('start-btn');
+  btn.style.opacity=1;
+  btn.style.pointerEvents='auto';
+}
 
 document.getElementById('start-btn').onclick=()=>{
   document.getElementById('start-btn').remove();
