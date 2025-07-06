@@ -1,161 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anniversary Surprise ❤️</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Sacramento&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      overflow: hidden;
-      background: #000;
-      color: #0f0;
-      font-family: 'Orbitron', sans-serif;
-    }
-    #terminal {
-      position: absolute;
-      inset: 0;
-      padding: 20px;
-      white-space: pre-wrap;
-      font-size: 18px;
-      line-height: 1.5;
-      background: #000;
-      opacity: 1;
-      z-index: 5;
-    }
-    #start-btn {
-      opacity: 0;
-      pointer-events: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 14px 28px;
-      background: #39ff14;
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.3em;
-      font-family: 'Orbitron', sans-serif;
-      cursor: pointer;
-      z-index: 999;
-      transition: opacity 1s ease, transform 0.3s ease;
-    }
-    #start-btn:hover {
-      transform: translate(-50%, -50%) scale(1.05);
-      box-shadow: 0 0 20px #39ff14;
-    }
-    #scene {
-      display: none;
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #1a000d, #0d001a);
-      overflow: hidden;
-    }
-    #heart-svg {
-      position: absolute;
-      top: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70vw;
-      max-width: 400px;
-      height: auto;
-      z-index: 2;
-    }
-    .heart-path {
-      stroke: #39ff14;
-      stroke-width: 5;
-      fill: none;
-      stroke-dasharray: 4000;
-      stroke-dashoffset: 4000;
-      animation: drawPulse 4s forwards;
-    }
-    @keyframes drawPulse {
-      to { stroke-dashoffset: 0; }
-      50% { filter: drop-shadow(0 0 20px #39ff14); }
-    }
-    #heart-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 70%;
-      text-align: center;
-      font-size: 1.3em;
-      line-height: 1.5;
-      color: #fff;
-      font-family: 'Sacramento', cursive;
-      z-index: 3;
-    }
-    #calendar {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      width: 220px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border: 2px solid #39ff14;
-      border-radius: 10px;
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      z-index: 2;
-    }
-    #calendar .month {
-      grid-column: 1 / 8;
-      font-size: 1.2em;
-      text-align: center;
-    }
-    #calendar div {
-      padding: 6px;
-      text-align: center;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    #calendar .day:hover {
-      background: rgba(57, 255, 20, 0.2);
-    }
-    #calendar .highlight {
-      background: #39ff14;
-      color: #000;
-      animation: pop 0.5s ease-out;
-    }
-    @keyframes pop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    #particles, #comets {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-    #muteBtn {
-      position: absolute;
-      top: 5%;
-      right: 5%;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #39ff14;
-      color: #000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2em;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anniversary Surprise ❤️</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Sacramento&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    overflow: hidden;
+    background: #000;
+    color: #0f0;
+    font-family: 'Orbitron', sans-serif;
+  }
+  #terminal {
+    position: absolute;
+    inset: 0;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 18px;
+    line-height: 1.5;
+    background: #000;
+    opacity: 1;
+    z-index: 5;
+  }
+  #start-btn {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 14px 28px;
+    background: #39ff14;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3em;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    z-index: 999;
+  }
+  #start-btn.show {
+    visibility: visible;
+  }
+  #scene {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a000d, #0d001a);
+    overflow: hidden;
+  }
+  #heart-svg {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70vw;
+    max-width: 400px;
+    height: auto;
+    z-index: 2;
+  }
+  .heart-path {
+    stroke: #39ff14;
+    stroke-width: 5;
+    fill: none;
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: drawPulse 4s forwards;
+  }
+  @keyframes drawPulse {
+    to { stroke-dashoffset: 0; }
+    50% { filter: drop-shadow(0 0 20px #39ff14); }
+  }
+  #heart-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.5;
+    color: #fff;
+    font-family: 'Sacramento', cursive;
+    z-index: 3;
+  }
+  #calendar {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    width: 220px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border: 2px solid #39ff14;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    z-index: 2;
+  }
+  #calendar .month {
+    grid-column: 1 / 8;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  #calendar div {
+    padding: 6px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  #calendar .highlight {
+    background: #39ff14;
+    color: #000;
+  }
+  #particles, #comets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  #muteBtn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #39ff14;
+    color: #000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
 
@@ -172,7 +154,7 @@
   <div id="calendar">
     <div class="month">July 2025</div>
     <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-    ${[...Array(31).keys()].map(i=>`<div class="day ${i+1===9?'highlight':''}">${i+1}</div>`).join('')}
+    ${[...Array(31).keys()].map(i=>`<div class="${i+1===9?'highlight':''}">${i+1}</div>`).join('')}
   </div>
   <div id="muteBtn">🔊</div>
   <audio id="bg-music" loop src="LoveStory.mp3"></audio>
@@ -180,12 +162,8 @@
 
 <script>
 const terminal=document.getElementById('terminal');
-const lines=[
-  "Initializing anniversary protocol v1.0...",
-  "Connecting to ❤️...",
-  "Compiling love memories...",
-  "Success ✅"
-];
+const btn=document.getElementById('start-btn');
+const lines=["Initializing anniversary protocol v1.0...","Connecting to ❤️...","Compiling love memories...","Success ✅"];
 let idx=0,char=0;
 function typeLine(){
   if(idx<lines.length){
@@ -203,42 +181,26 @@ function typeLine(){
     }
     typeChar();
   }else{
-    revealButton();
+    btn.classList.add('show');
   }
 }
 typeLine();
 
-function revealButton(){
-  const btn=document.getElementById('start-btn');
-  btn.style.opacity=1;
-  btn.style.pointerEvents='auto';
-}
-
-document.getElementById('start-btn').onclick=()=>{
-  document.getElementById('start-btn').remove();
-  terminal.style.transition='opacity 1s';
-  terminal.style.opacity=0;
-  setTimeout(()=>{terminal.remove();showSurprise();},1000);
-};
-
-function showSurprise(){
+btn.onclick=()=>{
+  btn.remove();
+  terminal.remove();
   const scene=document.getElementById('scene');
-  scene.style.display='block';scene.style.opacity=0;scene.style.transition='opacity 1s';
-  requestAnimationFrame(()=>scene.style.opacity=1);
-
+  scene.style.display='block';
   const music=document.getElementById('bg-music');
-  music.volume=0;music.play().catch(()=>{});let vol=0;
-  const fadeIn=setInterval(()=>{if(vol<1){vol+=0.02;music.volume=vol}else clearInterval(fadeIn)},100);
-
+  music.play().catch(()=>{});
   document.getElementById('muteBtn').style.display='flex';
   document.getElementById('muteBtn').onclick=()=>{
     music.muted=!music.muted;
     document.getElementById('muteBtn').textContent=music.muted?'🔇':'🔊';
-  }
-
+  };
   initParticles();
   initComets();
-}
+};
 
 function initParticles(){
   const c=document.getElementById('particles');c.width=innerWidth;c.height=innerHeight;
