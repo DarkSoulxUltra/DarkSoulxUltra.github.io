@@ -50,12 +50,14 @@
     }
 
     h1 {
-      font-family: 'Sacramento', cursive;
-      font-size: 3.2em;
-      margin-bottom: 40px;
-      color: #ffdd59;
-      text-shadow: 0 0 15px #ffa502, 0 0 30px #ff6348;
-      animation: pulse 2s infinite alternate;
+     font-family: 'Sacramento', cursive;
+     font-size: clamp(2em, 5vw, 3.5em); /* Responsive scaling */
+     margin-bottom: 40px;
+     color: #ffdd59;
+     text-shadow: 0 0 15px #ffa502, 0 0 30px #ff6348;
+     animation: pulse 2s infinite alternate;
+     text-align: center;
+     padding: 0 10px; /* Avoid edges touching */
     }
 
     @keyframes pulse {
