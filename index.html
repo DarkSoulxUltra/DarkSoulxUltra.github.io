@@ -3,210 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anniversary Surprise ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+  <title>Choose Your Anniversary Vibes 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Orbitron&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
       margin: 0;
-      background: black;
-      color: #0f0;
-      font-family: 'Orbitron', monospace;
+      padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at center, #1a1a2e, #16213e);
       overflow: hidden;
-      height: 100vh;
+      font-family: 'Orbitron', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-    }
-    #terminal {
-      font-size: 1.4em;
-      text-align: left;
-      white-space: pre-wrap;
-      width: 90%;
-      max-width: 600px;
-      margin: auto;
-    }
-    #startBtn {
-      display: none;
-      margin-top: 20px;
-      padding: 15px 40px;
-      background: #00ff99;
-      color: black;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.5em;
-      cursor: pointer;
-      box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
-      transition: all 0.3s ease;
-    }
-    #startBtn:hover {
-      background: #00ffaa;
-      box-shadow: 0 0 30px #00ffaa, 0 0 60px #00ffaa;
-    }
-    #surprise {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, #1a0025, #000);
       color: #fff;
-      font-family: 'Sacramento', cursive;
-      text-align: center;
-      overflow: hidden;
     }
-    .heart {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      height: 300px;
-      border: 3px solid #00ff99;
-      border-radius: 50% 50% 0 0;
-      animation: neonPulse 2s infinite alternate;
-      clip-path: path('M512 921C512 921 64 568 64 315C64 153 215 64 357 64C474 64 512 153 512 153C512 153 550 64 667 64C809 64 960 153 960 315C960 568 512 921 512 921Z');
-    }
-    @keyframes neonPulse {
-      from { box-shadow: 0 0 20px #00ff99; }
-      to { box-shadow: 0 0 40px #00ffaa, 0 0 80px #00ffaa; }
-    }
-    .message {
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 1.8em;
-      max-width: 90%;
-    }
-    .calendar {
-      position: absolute;
-      bottom: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #00ff99;
-      border: 2px solid #00ff99;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #00ff99;
-      font-family: 'Orbitron', monospace;
-    }
-    .stars, .comets {
+
+    .confetti {
       position: absolute;
       width: 100%;
       height: 100%;
       pointer-events: none;
       overflow: hidden;
     }
-    .star, .comet {
+
+    .confetti-piece {
       position: absolute;
-      background: white;
+      width: 8px;
+      height: 8px;
+      background: #ff4757;
+      opacity: 0.8;
       border-radius: 50%;
+      animation: float 6s linear infinite;
     }
-    .star {
-      width: 2px;
-      height: 2px;
-      animation: twinkle 2s infinite alternate ease-in-out;
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
-    .comet {
-      width: 4px;
-      height: 20px;
-      background: linear-gradient(white, transparent);
-      animation: flyby 3s linear infinite;
+
+    h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: 3.5em;
+      margin-bottom: 40px;
+      color: #ffdd59;
+      text-shadow: 0 0 15px #ffa502, 0 0 30px #ff6348;
+      animation: pulse 2s infinite alternate;
     }
-    @keyframes twinkle {
-      from { opacity: 0.2; }
-      to { opacity: 1; }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
     }
-    @keyframes flyby {
-      from { transform: translateX(100vw) translateY(0); opacity: 1; }
-      to { transform: translateX(-100vw) translateY(100vh); opacity: 0; }
-    }
-    .mute-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: #00ff99;
-      color: black;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      line-height: 50px;
-      font-size: 1.4em;
+
+    .btn {
+      margin: 15px;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(145deg, #ff4d4d, #ff6b81);
+      color: #ffeaa7;
+      font-size: 1.5em;
+      text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 0 20px #00ff99;
+      box-shadow: 0 0 20px #ff6b81;
+      transition: all 0.4s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(145deg, #4d4dff, #9b59b6);
+      color: #ffffff;
+      box-shadow: 0 0 30px #6c5ce7, 0 0 60px #a29bfe;
+      transform: scale(1.1);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
-  <div id="terminal"></div>
-  <button id="startBtn" onclick="startSurprise()">Launch Surprise 💖</button>
-  <div id="surprise">
-    <div class="stars"></div>
-    <div class="comets"></div>
-    <div class="heart"></div>
-    <div class="message">Every Love Story is special, unique and beautiful. But ours is my Favourite 💖</div>
-    <div class="calendar">July 2025<br>S M T W T F S<br>    1  2  3  4  5  6<br>7  8 <span style='color:#ff69b4;font-weight:bold;'>9</span> 10 11 12 13<br>14 15 16 17 18 19 20<br>21 22 23 24 25 26 27<br>28 29 30 31</div>
-    <div class="mute-btn" onclick="toggleMute()">🔊</div>
-  </div>
-  <audio id="bg-music" loop>
-    <source src="LoveStory.mp3" type="audio/mpeg">
-  </audio>
-  <script>
-    const terminalText = [
-      "Initializing anniversary protocol v1.0...",
-      "Connecting to ❤️...",
-      "Compiling love memories...",
-      "Success ✅"
-    ];
-    let i = 0;
-    function typeLine() {
-      if (i < terminalText.length) {
-        document.getElementById('terminal').innerHTML += terminalText[i] + '\n';
-        i++;
-        setTimeout(typeLine, 1200);
-      } else {
-        document.getElementById('startBtn').style.display = 'block';
-      }
-    }
-    typeLine();
+  <div class="confetti" id="confetti"></div>
+  <h1>Choose Your Anniversary Vibes 🎉</h1>
+  <button class="btn" onclick="location.href='romance.html'">🌸 Romantic Bliss</button>
+  <button class="btn" onclick="location.href='neon.html'">⚡ Neon Future Love</button>
 
-    function startSurprise() {
-      document.getElementById('terminal').style.display = 'none';
-      document.getElementById('startBtn').style.display = 'none';
-      document.getElementById('surprise').style.display = 'block';
-      playMusic();
-      createParticles();
+  <script>
+    function createConfettiPiece() {
+      const confetti = document.getElementById('confetti');
+      const piece = document.createElement('div');
+      piece.classList.add('confetti-piece');
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.top = '100vh';
+      piece.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      piece.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      confetti.appendChild(piece);
+      setTimeout(() => piece.remove(), 6000);
     }
-    const music = document.getElementById('bg-music');
-    function playMusic() {
-      music.play().catch(()=>console.log('Autoplay blocked'));
-    }
-    function toggleMute() {
-      music.muted = !music.muted;
-      document.querySelector('.mute-btn').textContent = music.muted ? '🔇' : '🔊';
-    }
-    function createParticles() {
-      const stars = document.querySelector('.stars');
-      const comets = document.querySelector('.comets');
-      for (let i=0;i<100;i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.left = Math.random()*100+'vw';
-        star.style.top = Math.random()*100+'vh';
-        stars.appendChild(star);
-      }
-      setInterval(()=>{
-        const comet = document.createElement('div');
-        comet.classList.add('comet');
-        comet.style.left = Math.random()*100+'vw';
-        comets.appendChild(comet);
-        setTimeout(()=>comet.remove(), 3000);
-      }, 1500);
-    }
+    setInterval(createConfettiPiece, 100);
   </script>
 </body>
 </html>
