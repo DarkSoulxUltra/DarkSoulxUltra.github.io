@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anniversary Surprise ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Sacramento&family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #0f0;
+      font-family: 'Orbitron', monospace;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #terminal {
+      font-size: 1.2em;
+      text-align: left;
+      white-space: pre-wrap;
+      max-width: 90%;
+      margin: auto;
+      color: #0f0;
+    }
+    #startBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #00ff99;
+      color: black;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00ff99;
+      transition: all 0.3s ease;
+    }
+    #startBtn:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 25px #00ffaa;
+    }
+    #surprise {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #220033, #000);
+      color: #fff;
+      text-align: center;
+      font-family: 'Indie Flower', cursive;
+      animation: fadeIn 2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .heart-container {
+      position: relative;
+      margin-top: 50px;
+      width: 420px;
+      height: 400px;
+      animation: pulse 2s infinite alternate;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .heart-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 25px #ff66cc);
+    }
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 1.3em;
+      width: 85%;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+    .calendar {
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: fit-content;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      color: #ff99cc;
+      font-family: 'Orbitron', monospace;
+      box-shadow: 0 0 25px #ff66cc;
+      display: inline-block;
+    }
+    .calendar strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.6em;
+      color: #ff66cc;
+    }
+    .calendar-table {
+      border-collapse: separate;
+      border-spacing: 12px;
+    }
+    .calendar-table td {
+      width: 45px;
+      height: 45px;
+      text-align: center;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 8px #ff66cc;
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #ff99cc;
+    }
+    .calendar-table td:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px #ff66cc, inset 0 0 15px #ff66cc;
+    }
+    .highlight {
+      background: #ff69b4;
+      color: #000;
+      font-weight: bold;
+      text-shadow: 0 0 10px #ff69b4;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #ff69b4, inset 0 0 15px #ff69b4;
+    }
+    .mute-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff66cc;
+      color: black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff66cc;
+    }
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+      animation: twinkle 3s infinite alternate ease-in-out;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <button id="startBtn" onclick="startSurprise()">Launch Surprise 💖</button>
+  <div id="surprise">
+    <div class="stars"></div>
+    <div class="heart-container">
+      <svg class="heart-svg" viewBox="0 0 32 29.6">
+        <path fill="none" stroke="#ff66cc" stroke-width="0.8" d="M23.6,0c-3.4,0-6.4,2.4-7.6,5.6C14.8,2.4,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,4.6,3.2,8.4,7.6,11.6 l7.6,6.8l7.6-6.8c4.4-3.2,7.6-7,7.6-11.6C32,3.8,28.2,0,23.6,0z"/>
+      </svg>
+      <div class="message">
+        Every Love Story is special,<br>Unique and beautiful,<br>But ours is my Favourite 💖
+      </div>
+    </div>
+    <div class="calendar">
+      <strong>July 2025</strong>
+      <table class="calendar-table">
+        <tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>
+        <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><td>6</td><td>7</td><td>8</td><td class="highlight">9</td><td>10</td><td>11</td><td>12</td></tr>
+        <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+        <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+        <tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
+      </table>
+    </div>
+    <div class="mute-btn" onclick="toggleMute()">🔊</div>
+  </div>
+  <audio id="bg-music" loop>
+    <source src="LoveStory.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const terminalText = [
+        "Initializing anniversary protocol v1.0...",
+        "Connecting to ❤️...",
+        "Compiling love memories...",
+        "Success ✅"
+      ];
+      let index = 0;
+      function typeLine() {
+        if (index < terminalText.length) {
+          document.getElementById('terminal').innerHTML += terminalText[index] + "<br>";
+          index++;
+          setTimeout(typeLine, 1200);
+        } else {
+          document.getElementById('startBtn').style.display = 'inline-block';
+        }
+      }
+      typeLine();
+    });
+    function startSurprise() {
+      document.getElementById('terminal').style.display = 'none';
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('surprise').style.display = 'block';
+      createStars();
+      playMusic();
+    }
+    const music = document.getElementById('bg-music');
+    function playMusic() {
+      music.play().catch(()=>console.log('Autoplay blocked'));
+    }
+    function toggleMute() {
+      music.muted = !music.muted;
+      document.querySelector('.mute-btn').textContent = music.muted ? '🔇' : '🔊';
+    }
+    function createStars() {
+      const stars = document.querySelector('.stars');
+      for (let i=0;i<80;i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random()*100+'vw';
+        star.style.top = Math.random()*100+'vh';
+        stars.appendChild(star);
+      }
+    }
+  </script>
+</body>
+</html>
