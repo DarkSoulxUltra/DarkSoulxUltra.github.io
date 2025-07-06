@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Marriage Anniversary ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Indie+Flower&family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      font-family: 'Indie Flower', cursive;
+      color: #8b004f;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      transition: background 2s ease, color 2s ease;
+    }
+    audio {
+      display: none;
+    }
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      gap: 20px;
+    }
+    h1 {
+      font-size: 2.8em;
+      animation: glow 2s infinite alternate;
+      font-family: 'Great Vibes', cursive;
+      color: #8b004f;
+      text-shadow: 2px 2px 8px #ffffff88;
+      margin: 0;
+    }
+    #main-message {
+      font-size: 1.4em;
+      max-width: 90%;
+      line-height: 1.8em;
+      color: #6b003a;
+      font-family: 'Indie Flower', cursive;
+    }
+    .heart-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+    .heart-svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .heart-path {
+      fill: none;
+      stroke: #ff99cc;
+      stroke-width: 5;
+      filter: drop-shadow(0 0 15px #ff99cc);
+      animation: pulseGlow 2s infinite;
+      transition: stroke 2s ease, filter 2s ease;
+    }
+    @keyframes pulseGlow {
+      0% { filter: drop-shadow(0 0 10px #ff99cc); }
+      50% { filter: drop-shadow(0 0 30px #ff66b2) drop-shadow(0 0 50px #ff1493); }
+      100% { filter: drop-shadow(0 0 10px #ff99cc); }
+    }
+    .heart-text {
+      position: absolute;
+      color: #fff5f8;
+      font-size: 1.7em;
+      line-height: 1.7em;
+      text-align: center;
+      padding: 10px;
+      max-width: 75%;
+      word-wrap: break-word;
+      text-shadow: 1px 1px 4px #ff1493;
+      font-family: 'Sacramento', cursive;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .shooting-star {
+      position: fixed;
+      width: 3px;
+      height: 100px;
+      background: linear-gradient(180deg, #ffffff, rgba(255,255,255,0));
+      opacity: 0.8;
+      animation: shoot 2s linear forwards;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes shoot {
+      0% {
+        transform: translate(0, 0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-500px, 500px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    .calendar {
+      background: #fff5f8;
+      color: #ff1493;
+      padding: 6px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ff69b4;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2.7px;
+      width: 180px;
+      font-family: 'Indie Flower', cursive;
+      animation: pulse 2s infinite;
+      font-size: 0.8em;
+      margin-top: 20px;
+    }
+    .calendar .month {
+      grid-column: span 7;
+      font-weight: bold;
+      color: #ff69b4;
+      margin-bottom: 4px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.4em;
+    }
+    .calendar div {
+      padding: 4px;
+      border-radius: 5px;
+      background: #ffe6f0;
+      color: #ff69b4;
+      text-align: center;
+    }
+    .calendar .highlight {
+      background: #ff69b4;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff1493;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .button {
+      background-color: #ff69b4;
+      color: #fff;
+      padding: 14px 35px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      font-family: 'Sacramento', cursive;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+    .button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    .mute-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4;
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: pulse 2s infinite;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" autoplay loop>
+    <source src="LoveStory.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="content-container">
+    <h1 id="main-title">A Very Happy Anniversary! ❤️</h1>
+    <p id="main-message">To my most beautiful wife,<br>
+    who has given my life a meaning. ✨<br>
+    I love you more than words can say.</p>
+    <button class="button" id="surpriseBtn" onclick="launchSurprise()">Click for a surprise</button>
+  </div>
+
+  <div class="mute-button" id="muteBtn" style="display:none;" onclick="toggleMute()">❤️</div>
+
+  <script>
+    let triggered = false;
+    let isMuted = false;
+    const music = document.getElementById('bg-music');
+
+    function launchSurprise() {
+      if (triggered) return;
+      triggered = true;
+      document.getElementById('surpriseBtn').remove();
+      document.body.style.background = 'radial-gradient(circle at center, #ffe1f2, #ff99cc, #ff66b2)';
+      document.body.style.color = '#fff5f8';
+      document.getElementById('muteBtn').style.display = 'block';
+
+      // Start playing background music with fade-in
+      music.volume = 0;
+      music.play().then(() => {
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          if (vol < 1) {
+            vol += 0.02;
+            music.volume = Math.min(vol, 1);
+          } else {
+            clearInterval(fadeIn);
+          }
+        }, 100);
+      }).catch(err => {
+        console.log('Autoplay blocked:', err);
+      });
+
+      const contentContainer = document.querySelector('.content-container');
+      contentContainer.innerHTML = `
+        <h1 id="main-title">My Forever Love 💖</h1>
+        <div class="heart-container">
+          <svg class="heart-svg" viewBox="0 0 1024 1024">
+            <path class="heart-path" d="M512 921C512 921 64 568 64 315C64 153 215 64 357 64C474 64 512 153 512 153C512 153 550 64 667 64C809 64 960 153 960 315C960 568 512 921 512 921Z" />
+          </svg>
+          <div class="heart-text">
+            Every Love Story is special, unique <br>and beautiful. But ours is my Favourite<br>💓.
+          </div>
+        </div>
+        <div class="calendar">
+          <div class="month">July 2025</div>
+          ${['S', 'M', 'T', 'W', 'T', 'F', 'S', '', '', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map(day => {
+            return `<div class="${day === 9 ? 'highlight' : ''}">${day}</div>`;
+          }).join('')}
+        </div>`;
+
+      setInterval(() => {
+        const star = document.createElement('div');
+        star.classList.add('shooting-star');
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 50 + 'vh';
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 2000);
+      }, 1000);
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      music.muted = isMuted;
+      document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '❤️';
+    }
+  </script>
+</body>
+</html>
