@@ -1,17 +1,18 @@
+<!-- FULL UTF-8 ENCODED FILE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Story of Us</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Orbitron&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       background: linear-gradient(135deg, #e6ccff, #f3e5f5);
-      font-family: 'Orbitron', cursive;
+      font-family: 'Dancing Script', cursive;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -119,7 +120,7 @@
       line-height: 1.6em;
     }
     .page-content::after {
-      content: "鉂わ笍";
+      content: "❤️";
       position: absolute;
       bottom: 10px;
       right: 15px;
@@ -182,28 +183,28 @@
   <div id="cover">
     <h1>The Story of Us</h1>
   </div>
-  <button id="openBtn" class="action-btn" style="display:none;" onclick="openBook()">Open Our Story 鉂わ笍</button>
+  <button id="openBtn" class="action-btn" style="display:none;" onclick="openBook()">Open Our Story ❤️</button>
 
   <div id="book"></div>
-  <button id="nextBtn" class="action-btn" style="display:none;" onclick="flipPage()">Next Page 鉃★笍</button>
-  <button id="resetBtn" class="action-btn bounce" style="display:none;" onclick="restartBook()">馃攣 Read Again</button>
+  <button id="nextBtn" class="action-btn" style="display:none;" onclick="flipPage()">Next Page ➡️</button>
+  <button id="resetBtn" class="action-btn bounce" style="display:none;" onclick="restartBook()">🔁 Read Again</button>
 
   <div class="petals" id="petals"></div>
-  <div class="mute-btn" onclick="toggleMute()">馃攰</div>
+  <div class="mute-btn" onclick="toggleMute()">🔊</div>
 
   <audio id="bg-music" loop autoplay>
     <source src="LoveStory.mp3" type="audio/mpeg">
   </audio>
-  <audio id="flip-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b87a94a5c8.mp3" preload="auto"></audio>
+  <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
 
   <script>
     const notes = [
-      "1. The random meet up to your home, which brought you into my life.馃珷",
-      "2. Your first birthday celebration, it was such a fun and romantic day, even though I was sleepless.馃槝",
-      "3. The long night talks with you, and opening our hearts to each other was gold.馃",
-      "4. The songs I dedicated to you on my Guitar and the more I fell in love with you.馃グ",
-      "5. The wait for this day was real, but the excitement made it beautiful.鈾ワ笍",
-      "6. Hope the surprise you got was awesome when you planned to buy clothes for wedding 馃構",
+      "1. The random meet up to your home, which brought you into my life.🫠",
+      "2. Your first birthday celebration, it was such a fun and romantic day, even though I was sleepless.😘",
+      "3. The long night talks with you, and opening our hearts to each other was gold.🤗",
+      "4. The songs I dedicated to you on my Guitar and the more I fell in love with you.🥰",
+      "5. The wait for this day was real, but the excitement made it beautiful.♥️",
+      "6. Hope the surprise you got was awesome when you planned to buy clothes for wedding 😋",
       "7. Slowly the days passed and our wait came to an end for our wedding day.",
       "8. And we kept celebrating each day loving each other with no bounds.",
       "9. Every single day with you felt like a heaven."
@@ -259,7 +260,7 @@
     }
     function toggleMute() {
       music.muted = !music.muted;
-      document.querySelector('.mute-btn').textContent = music.muted ? '馃攪' : '馃攰';
+      document.querySelector('.mute-btn').textContent = music.muted ? '🔇' : '🔊';
     }
     function createPetals() {
       const petalsContainer = document.getElementById('petals');
