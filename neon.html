@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Neon Love Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Sacramento&family=Indie+Flower&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #220033, #000);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #terminal {
+      font-size: 1.2em;
+      text-align: left;
+      white-space: pre-wrap;
+      max-width: 90%;
+      margin: auto;
+      color: #0f0;
+    }
+    #startBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #00ff99;
+      color: black;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00ff99;
+      transition: all 0.3s ease;
+    }
+    #startBtn:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 25px #00ffaa;
+    }
+    #surprise {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 2s forwards;
+      width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .heart-container {
+      margin-top: 30px;
+      width: 400px;
+      height: 370px;
+      animation: pulse 2s infinite alternate;
+    }
+    .heart-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 20px #ff66cc);
+    }
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 1.1em;
+      width: 75%;
+      font-family: 'Indie Flower', cursive;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+    .chart-container {
+      margin-top: 40px;
+      width: 90%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      box-shadow: 0 0 25px #ff66cc;
+      padding: 20px;
+    }
+    .mute-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff66cc;
+      color: black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff66cc;
+      z-index: 999;
+    }
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+      animation: twinkle 3s infinite alternate ease-in-out;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <button id="startBtn" onclick="startSurprise()">Launch Surprise 💖</button>
+  <div id="surprise">
+    <div class="stars"></div>
+    <div class="heart-container">
+      <svg class="heart-svg" viewBox="0 0 32 29.6">
+        <path fill="none" stroke="#ff66cc" stroke-width="0.8" d="M23.6,0c-3.4,0-6.4,2.4-7.6,5.6C14.8,2.4,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,4.6,3.2,8.4,7.6,11.6l7.6,6.8l7.6-6.8c4.4-3.2,7.6-7,7.6-11.6C32,3.8,28.2,0,23.6,0z"/>
+      </svg>
+      <div class="message">
+        Every Love Story is special,<br>Unique and beautiful,<br>But ours is my Favourite ❤️
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas id="milestoneChart"></canvas>
+    </div>
+    <div class="mute-btn" onclick="toggleMute()">🔊</div>
+  </div>
+  <audio id="bg-music" loop>
+    <source src="LoveStory.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const milestones = [
+      { date: '2024-02-04', label: 'I came to visit you 🫠' },
+      { date: '2024-02-25', label: 'The day we got engaged 💍' },
+      { date: '2024-04-06', label: 'Celebrated your first birthday 🥳' },
+      { date: '2024-04-30', label: 'A surprise meet up with you 😘' },
+      { date: '2024-07-09', label: 'The Day We tied knots 💒' },
+      { date: '2024-07-22', label: 'Trip begins in Goa 🌴' },
+      { date: '2024-09-07', label: 'Ganesh Chaturthi celebration 🙏' },
+      { date: '2024-10-20', label: 'First Karva Chauth 🪔' },
+      { date: '2024-10-31', label: 'First Diwali celebration 🎆' },
+      { date: '2024-11-03', label: 'Ramtek trip 🏞️' },
+      { date: '2024-12-20', label: 'Divya\'s Wedding 💃' },
+      { date: '2025-01-17', label: 'Trimbakeshwar & Patil wedding 🙌' },
+      { date: '2025-03-12', label: 'Trip to Lalitpur ✈️' },
+      { date: '2025-04-06', label: 'Our Birthday celebrations 🎂' },
+      { date: '2025-07-09', label: 'Our First Anniversary ❤️🎉' }
+    ];
+    let music = document.getElementById('bg-music');
+    document.addEventListener('DOMContentLoaded', () => {
+      const terminalText = [
+        "Initializing anniversary protocol v1.0...",
+        "Connecting to ❤️...",
+        "Compiling love memories...",
+        "Success ✅"
+      ];
+      let index = 0;
+      function typeLine() {
+        if (index < terminalText.length) {
+          document.getElementById('terminal').innerHTML += terminalText[index] + "\n";
+          index++;
+          setTimeout(typeLine, 1200);
+        } else {
+          document.getElementById('startBtn').style.display = 'inline-block';
+        }
+      }
+      typeLine();
+    });
+    function startSurprise() {
+      document.getElementById('terminal').style.display = 'none';
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('surprise').style.display = 'flex';
+      createStars();
+      playMusic();
+      buildChart();
+    }
+    function playMusic() {
+      music.play().catch(() => console.log('Autoplay blocked'));
+    }
+    function toggleMute() {
+      music.muted = !music.muted;
+      document.querySelector('.mute-btn').textContent = music.muted ? '🔇' : '🔊';
+    }
+    function createStars() {
+      const stars = document.querySelector('.stars');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        stars.appendChild(star);
+      }
+    }
+    function buildChart() {
+      const ctx = document.getElementById('milestoneChart').getContext('2d');
+      const labels = milestones.map(m => m.date);
+      const data = milestones.map((_, i) => i + 1);
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Our Journey ❤️',
+            data: data,
+            borderColor: '#ff66cc',
+            backgroundColor: '#ff66cc',
+            fill: false,
+            tension: 0.3,
+            pointBackgroundColor: '#ff99cc',
+            pointBorderColor: '#fff',
+            pointRadius: 6,
+            pointHoverRadius: 10
+          }]
+        },
+        options: {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return milestones[context.dataIndex].label;
+                }
+              },
+              backgroundColor: '#ff66cc',
+              titleColor: '#fff',
+              bodyColor: '#fff'
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#ffccf9' },
+              grid: { color: 'rgba(255,255,255,0.1)' }
+            },
+            y: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
